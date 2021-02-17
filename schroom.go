@@ -81,26 +81,25 @@ func main() {
     }
 
     // Read flag arguments.
+    allPtr := flag.Bool("all", false, "Get the whole schedule. Blocks last and next.")
     lastPtr := flag.Bool("last", false, "Get the room for the last meeting.")
     nextPtr := flag.Bool("next", false, "Get the room of the meeting happening next.")
     flag.Parse()
 
-    if !*nextPtr && !*lastPtr {
-        // fmt.Printf("Schedule: %+v\n", schedule)
-        pschedule(schedule)
-        fmt.Println("-------------")
+    if !*allPtr && !*nextPtr && !*lastPtr {
         fmt.Println("Usage:")
         flag.PrintDefaults()
+        os.Exit(1)
+    }
+
+    if *allPtr {
+        pschedule(schedule)
         os.Exit(1)
     }
 
     mt := makemt()
     wi := int(time.Now().Weekday())
     todayMeetings := schedule[wi - 1].Meetings
-
-    // 11:00 >> 11:30, 
-    // Move til now + 10 == last meeting
-    // Return next meeting or size
 
     // 11:00 >> 11:30
     // when reach 11:30 or more then it is no longer next

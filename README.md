@@ -1,6 +1,8 @@
 # Schroom: sch(edule of my meeting)room(s)
 This is a CLI app to store and read your meeting room schedule
 ### Usage
+- -all
+    - Get the whole schedule. Blocks last and next.
 - -last
     - Get the room for the last meeting.
 - -next
